@@ -5,7 +5,7 @@ x-hraftd: &hraftd
   networks:
     - hraftd
   environment:
-    HRAFTD_JOIN_ADDRESS: hraftd
+    HRAFTD_JOIN_ADDRESS: hraftd:11000
     TZ: Asia/Tokyo
   restart: unless-stopped
 

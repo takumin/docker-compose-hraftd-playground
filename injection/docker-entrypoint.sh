@@ -43,10 +43,15 @@ fi
 
 echo 'Environment Variables'
 echo ''
-echo "HRAFTD_UID:      '${HRAFTD_UID}'"
-echo "HRAFTD_GID:      '${HRAFTD_GID}'"
-echo "HRAFTD_DATA_DIR: '${HRAFTD_DATA_DIR}'"
-echo "TZ:              '${TZ}'"
+echo "HRAFTD_UID:               '${HRAFTD_UID}'"
+echo "HRAFTD_GID:               '${HRAFTD_GID}'"
+echo "HRAFTD_NODE_NAME:         '${HRAFTD_NODE_NAME}'"
+echo "HRAFTD_HTTP_BIND_ADDRESS: '${HRAFTD_HTTP_BIND_ADDRESS}'"
+echo "HRAFTD_RAFT_BIND_ADDRESS: '${HRAFTD_RAFT_BIND_ADDRESS}'"
+echo "HRAFTD_JOIN_ADDRESS:      '${HRAFTD_JOIN_ADDRESS}'"
+echo "HRAFTD_INMEM_STORAGE:     '${HRAFTD_INMEM_STORAGE}'"
+echo "HRAFTD_DATA_DIR:          '${HRAFTD_DATA_DIR}'"
+echo "TZ:                       '${TZ}'"
 echo ''
 
 ##############################################################################
@@ -188,7 +193,7 @@ cat > '/etc/sv/hraftd/run' <<- __EOF__
 #!/bin/sh
 set -e
 exec 2>&1
-exec su-exec ${HRAFTD_UID}:${HRAFTD_GID} hraftd -id ${HRAFTD_NODE_NAME} ${HRAFTD_DATA_DIR}
+exec su-exec ${HRAFTD_UID}:${HRAFTD_GID} hraftd ${ARGS}
 __EOF__
 chmod 0755 '/etc/sv/hraftd/run'
 

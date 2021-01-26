@@ -18,7 +18,6 @@ ENV CGO_ENABLED="0"
 COPY hraftd /go/src/github.com/otoolep/hraftd
 WORKDIR /go/src/github.com/otoolep/hraftd
 RUN go mod download
-COPY . .
 RUN go build -a -o /usr/local/bin/hraftd .
 
 ################################################################################
