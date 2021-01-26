@@ -1,0 +1,45 @@
+version: '3.8'
+
+x-hraftd: &hraftd
+  image: ${REPOSITORY:-takumi/hraftd-playground}:latest
+  networks:
+    - hraftd
+  environment:
+    HRAFTD_JOIN_ADDRESS: hraftd
+    TZ: Asia/Tokyo
+  restart: unless-stopped
+
+services:
+  hraftd:
+    <<: *hraftd
+    hostname: hraftd
+    container_name: hraftd
+    ports:
+      - "11000:11000"
+      - "12000:12000"
+    environment:
+      TZ: Asia/Tokyo
+
+  hraftd-1:
+    <<: *hraftd
+    hostname: hraftd-1
+    container_name: hraftd-1
+
+  hraftd-2:
+    <<: *hraftd
+    hostname: hraftd-2
+    container_name: hraftd-2
+
+  hraftd-3:
+    <<: *hraftd
+    hostname: hraftd-3
+    container_name: hraftd-3
+
+  hraftd-4:
+    <<: *hraftd
+    hostname: hraftd-4
+    container_name: hraftd-4
+
+networks:
+  hraftd:
+    name: hraftd

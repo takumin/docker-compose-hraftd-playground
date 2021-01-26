@@ -1,0 +1,3 @@
+[submodule "hraftd"]
+	path = hraftd
+	url = https://github.com/otoolep/hraftd.git
