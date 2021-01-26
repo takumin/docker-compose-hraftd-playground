@@ -18,10 +18,10 @@ if [ -z "${HRAFTD_NODE_NAME:-}" ]; then
 	HRAFTD_NODE_NAME="$(hostname)"
 fi
 if [ -z "${HRAFTD_HTTP_BIND_ADDRESS:-}" ]; then
-	HRAFTD_HTTP_BIND_ADDRESS=":11000"
+	HRAFTD_HTTP_BIND_ADDRESS="$(hostname):11000"
 fi
 if [ -z "${HRAFTD_RAFT_BIND_ADDRESS:-}" ]; then
-	HRAFTD_RAFT_BIND_ADDRESS=":12000"
+	HRAFTD_RAFT_BIND_ADDRESS="$(hostname):12000"
 fi
 if [ -z "${HRAFTD_JOIN_ADDRESS:-}" ]; then
 	HRAFTD_JOIN_ADDRESS=""
@@ -163,6 +163,14 @@ fi
 ##############################################################################
 
 chown -R "${HRAFTD_UID}:${HRAFTD_GID}" "${HRAFTD_DATA_DIR}"
+
+##############################################################################
+# Wait
+##############################################################################
+
+if [ -n "${HRAFTD_JOIN_ADDRESS}" ]; then
+	sleep 3 && dockerize -timeout "30s" -wait "tcp://${HRAFTD_JOIN_ADDRESS}"
+fi
 
 ##############################################################################
 # Daemon
